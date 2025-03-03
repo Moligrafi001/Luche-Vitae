@@ -10,8 +10,8 @@ local Configs = {}
 function LucheVitae:Settings(config)
     Configs.Service = config.Service or "DefaultService"
     Configs.KickBan = config.KickBan or false
-    print("[LucheVitae] Configurado serviço:", settings.Service)
-    print("[LucheVitae] Configurado serviço:", settings.KickBan)
+    print("[LucheVitae] Configurado serviço:", Configs.Service)
+    print("[LucheVitae] Configurado serviço:", Configs.KickBan)
 end
 
 -- Método para imprimir o serviço configurado
