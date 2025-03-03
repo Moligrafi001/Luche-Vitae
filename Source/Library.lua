@@ -3,6 +3,7 @@ LucheVitae.__index = LucheVitae
 
 local Configs = {}
 
+-- Funções Locais
 local function AdmMsg(type, msg)
   if type == p then
     print("[ Luche Vitae ] - " .. tostring(msg))
@@ -10,11 +11,26 @@ local function AdmMsg(type, msg)
     warn("[ Luche Vitae ] - " .. tostring(msg))
   elseif type == e then
     error("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == s then
+    if msg == p then
+      print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    elseif msg == w then
+      warn(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    elseif msg == e then
+      error(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    end
+  end
+end
+local function d()
+  if Configs.DebugMode == true then
+    return true
   end
 end
 
 function LucheVitae:PrintService()
+  AdmMsg(s, p)
   AdmMsg(p, "YOUR SERVICE IS: " .. Configs.Service)
+  AdmMsg(s, p)
 end
 
 function LucheVitae:Settings(config)
@@ -25,10 +41,15 @@ function LucheVitae:Settings(config)
       Configs.KeySystem = config.KeySystem
     end
     if config.DebugMode == true then
+      AdmMsg(s, p)
       AdmMsg(w, "DEBUG MODE IS ENABLED")
+      AdmMsg(s, p)
+      AdmMsg(p, "LOADING SYSTEM...")
       AdmMsg(p, "SYSTEM STARTED SUCCESFULLY")
+      AdmMsg(s, p)
     end
   else
+    AdmMsg(s, w)
     AdmMsg(e, "MISSING PARAMS IN UR SETTINGS")
   end
 end
@@ -72,17 +93,17 @@ function LucheVitae:Implement(tipo)
   
     if not response or ((tipo == "Check Banned" or tipo == "Everything") and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
-      return
+      AdmMsg(e, "YOU ARE BANNED FROM THIS SERVICE")
     end
-    if Configs.DebugMode == true then
-      if tipo == "Check Banned" or tipo == "Everything" then
+    if d() then
+      if tipo == "Check Banned" then
         AdmMsg(P, "USER IS NOT BANNED FROM THIS SERVICE")
-      elseif tipo == "Log Statistic" or tipo == "Everything" then
+      elseif tipo == "Log Statistic" then
         AdmMsg(p, "STATISTIC LOGGED SUCCESFULLY")
-      elseif tipo == "Log Statistic" or tipo == "Everything" then
+      elseif tipo == "Send Webhook" then
         AdmMsg(p, "WEBHOOK EMBED SENT SUCCESFULLY")
-      elseif tipo == "Log Statistic" or tipo == "Everything" then
-        AdmMsg(p, "WEBHOOK EMBED SENT SUCCESFULLY")
+      elseif tipo == "Everything" then
+        AdmMsg(p, "EVERYTHING SEEMS FINE")
       else
         AdmMsg(e, "IMPLEMENT TYPE NOT SUPPORTED")
       end
@@ -99,14 +120,29 @@ function LucheVitae:AuthKey(key)
     Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
   })
-  
+  if d() then
+    AdmMsg(s, p)
+    AdmMsg(p, "CHEKING KEY... RESULT:")
+  end
   if response.StatusCode == 200 then
+    if d() then
+      AdmMsg(p, "CHECKED KEY IS VALID")
+    end
     return "valid"
   elseif response.StatusCode == 404 then
+    if d() then
+      AdmMsg(w, "CHECKED KEY IS INVALID")
+    end
     return "invalid"
   elseif response.StatusCode == 410 then
+    if d() then
+      AdmMsg(w, "CHECKED KEY EXPIRED")
+    end
     return "expired"
   else
+    if d() then
+      AdmMsg(w, "INTERNAL SERVER ERROR WHILE CHECKING THE KEY")
+    end
     return false
   end
 end
