@@ -9,9 +9,7 @@ end
 
 function LucheVitae:Settings(config)
   Configs.Service = config.Service or "DefaultService"
-  Configs.KickBan = config.KickBan or false
   print("[LucheVitae] Configurado serviço:", Configs.Service)
-  print("[LucheVitae] Configurado Kick:", Configs.KickBan)
 end
 
 function LucheVitae:Implement()
@@ -50,7 +48,7 @@ function LucheVitae:Implement()
       }
     })
   
-    if not response or Configs.KickBan == true and response.StatusCode == 401 then
+    if not response or response.StatusCode == 401 then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
     end
   end)
@@ -60,7 +58,7 @@ function LucheVitae:GetKey()
   setclipboard("http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId())
 end
 
-function LucheVitae:CheckKey(key)
+function LucheVitae:AuthKey(key)
   local response = request({
     Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Settings.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
