@@ -8,8 +8,14 @@ function LucheVitae:PrintService()
 end
 
 function LucheVitae:Settings(config)
-  Configs.Service = config.Service or "DefaultService"
-  print("[LucheVitae] Configurado serviço:", Configs.Service)
+  if config.Service and config.DebugMode and config.KeySystem and config.KeySystem.GuiMode and config.KeySystem.SaveKey then
+    Configs.Service = config.Service
+    Configs.DebugMode = config.DebugMode
+    Configs.KeySystem.GuiMode = config.KeySystem.GuiMode
+    Configs.KeySystem.SaveKey = config.KeySystem.SaveKey
+  else
+    error("[ Luche Vitae ] - MISSING PARAMS IN UR SETTINGS")
+  end
 end
 
 function LucheVitae:Implement()
