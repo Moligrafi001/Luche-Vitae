@@ -11,7 +11,7 @@ function LucheVitae:Settings(config)
     Configs.Service = config.Service or "DefaultService"
     Configs.KickBan = config.KickBan or false
     print("[LucheVitae] Configurado serviço:", Configs.Service)
-    print("[LucheVitae] Configurado serviço:", Configs.KickBan)
+    print("[LucheVitae] Configurado Kick:", Configs.KickBan)
 end
 
 -- Método para imprimir o serviço configurado
@@ -59,7 +59,7 @@ function LucheVitae:Implement()
       }
     })
   
-    if Configs.KickBan == true and response.StatusCode == 401 then
+    if not response or (Configs.KickBan == true and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
     end
   end)
