@@ -50,7 +50,7 @@ function LucheVitae:Settings(config)
     end
   else
     AdmMsg(9, w)
-    AdmMsg(e, "MISSING PARAMS IN UR SETTINGS")
+    AdmMsg(e, "MISSING SETTINGS PARAMS")
   end
 end
 
