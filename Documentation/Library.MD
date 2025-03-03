@@ -47,7 +47,7 @@ LucheVitae:Implement("Everything") -- Will do the same as the 3 above
 This is a exemple code, you can customize it the way you want, fell free to add and customize your own functions.
 
 ```lua
-local LucheVitae = loadstring(game:HttpGet("https://raw.githubusercontent.com/Moligrafi001/Luche-Vitae/refs/heads/test/Source/Library.lua"))() -- Load the Library
+local LucheVitae = loadstring(game:HttpGet("https://raw.githubusercontent.com/Moligrafi001/Luche-Vitae/refs/heads/main/Source/Library.lua"))() -- Load the Library
 
 LucheVitae:Settings({ -- Load your settings
   Service = "yourservice", -- Your service identificator
