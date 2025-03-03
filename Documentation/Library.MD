@@ -59,6 +59,8 @@ if not LucheVitae:Implement("Check Banned") then return end -- Will stop the scr
 local function ValidateKey(key) -- Your own custom function to check the key
   if LucheVitae:AuthKey(key) == "valid" then -- If key is valid
     print("Key is valid, loading...") -- Valid notification
+    -- If the user isn't banned and the key is valid
+    return true
   elseif LucheVitae:AuthKey(key) == "expired" then -- If key expired
     print("Key expired!") -- Expired notification
   elseif LucheVitae:AuthKey(key) == "invalid" then -- If key is invalid
@@ -66,14 +68,17 @@ local function ValidateKey(key) -- Your own custom function to check the key
   else -- If authentication failed
     print("Failed to check the key.") -- Failed to check key notification
   end -- Add your own actions
+  return false
 end
 local function GetKey() -- Your own custom function to get key
   setclipboard(LucheVitae:GetKey()) -- Will copy the get key url
 end
 
--- Implementation Functions
-LucheVitae:Implement("Log Statistic") -- Log this execution statistics
-LucheVitae:Implement("Check Banned") -- Check if the user is banned
-LucheVitae:Implement("Send Webhook") -- Send webhook embed
-LucheVitae:Implement("Everything") -- Will do the same as the 3 above
+if ValidateKey("YOUR-KEY-HERE") then
+  LucheVitae:Implement("Send Webhook") -- Send webhook embed
+  LucheVitae:Implement("Log Statistic") -- Log this execution Statistic
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))() -- Will execute infiniteyield
+else
+  GetKey()
+end
 ```
