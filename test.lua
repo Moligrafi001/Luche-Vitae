@@ -4,7 +4,7 @@ LucheVitae:Settings({ -- Load your settings
   Service = "hallowhub", -- Your service identificator
   DebugMode = true, -- Debug things in console
   
-  KeySystem = {
+  KeySystem = { -- Delete this if you're not using the key system
     GuiMode = true, -- Simple GUI to the key
     SaveKey = true -- Save valid key
   }
