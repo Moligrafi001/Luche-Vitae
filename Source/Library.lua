@@ -90,6 +90,7 @@ function LucheVitae:Implement(tipo)
     if not response or ((tipo == "Check Banned" or tipo == "Everything") and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
       AdmMsg(3, "YOU ARE BANNED FROM THIS SERVICE")
+      return false
     end
     if d() then
       if tipo == "Check Banned" then
