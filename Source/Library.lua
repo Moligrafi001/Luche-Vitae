@@ -143,6 +143,8 @@ function LucheVitae:GetKey()
   return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
+AdmMsg(9, p)
+
 local mt = {
     __newindex = function(self, key, value)
         print("Nova chave adicionada:", key, "com o valor:", value)
