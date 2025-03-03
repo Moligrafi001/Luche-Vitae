@@ -29,7 +29,7 @@ end
 
 -- Extra
 function LucheVitae:Settings(config)
-  if config.Service and config.DebugMode then
+  if config.Service then
     Configs.Service = config.Service
     Configs.DebugMode = config.DebugMode
     if config.KeySystem then
