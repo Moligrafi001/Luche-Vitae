@@ -88,3 +88,5 @@ else
   GetKey()
 end
 ```
+
+> Is your responsability to integrate the code in your script
