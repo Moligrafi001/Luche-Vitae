@@ -1,16 +1,21 @@
 local LucheVitae = {}
 LucheVitae.__index = LucheVitae
 
-local Configs = {}
+local Configs = {
+  LastSent = false
+}
 
 -- Funções Locais
 local function AdmMsg(type, msg)
   if type == 1 then
     print("[ Luche Vitae ] - " .. tostring(msg))
+    Configs.LastSent = false
   elseif type == 2 then
     warn("[ Luche Vitae ] - " .. tostring(msg))
+    Configs.LastSent = false
   elseif type == 3 then
     error("[ Luche Vitae ] - " .. tostring(msg))
+    Configs.LastSent = false
   elseif type == 9 then
     if msg == 1 then
       print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
@@ -150,5 +155,12 @@ local mt = {
     end,
     __metatable = false
 }
+
+while task.wait(9) do
+  if not Configs.LastSent then
+    print("Provided by Luche Vitae ™")
+    Configs.LastSent = true
+  end
+end
 
 return setmetatable(LucheVitae, mt)
