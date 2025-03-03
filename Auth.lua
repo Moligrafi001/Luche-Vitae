@@ -80,7 +80,7 @@ local mt = {
         print("Nova chave adicionada:", key, "com o valor:", value)
         rawset(self, key, value)
     end,
-    __metatable = false -- Protege a metatable
+    __metatable = false
 }
 
 return setmetatable(LucheVitae, mt)
