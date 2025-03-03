@@ -11,9 +11,7 @@ function LucheVitae:Settings(config)
   if config.Service and config.DebugMode and config.KeySystem and config.KeySystem.GuiMode and config.KeySystem.SaveKey then
     Configs.Service = config.Service
     Configs.DebugMode = config.DebugMode
-    Configs.KeySystem = {}
-    Configs.KeySystem.GuiMode = config.KeySystem.GuiMode
-    Configs.KeySystem.SaveKey = config.KeySystem.SaveKey
+    Configs.KeySystem = config.KeySystem
     if config.DebugMode == true then
       print("[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
     end
