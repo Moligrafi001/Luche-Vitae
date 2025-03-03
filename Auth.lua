@@ -75,7 +75,6 @@ function LucheVitae:AuthKey(key)
   end
 end
 
-
 local mt = {
     __newindex = function(self, key, value)
         print("Nova chave adicionada:", key, "com o valor:", value)
