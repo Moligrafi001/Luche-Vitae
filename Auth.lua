@@ -68,7 +68,7 @@ end
 
 function LucheVitae:AuthKey(key)
   local response = request({
-    Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Settings.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
+    Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
   })
   
