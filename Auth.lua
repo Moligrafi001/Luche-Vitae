@@ -8,10 +8,12 @@ function LucheVitae:PrintService()
 end
 
 function LucheVitae:Settings(config)
-  if config.Service and config.DebugMode and config.KeySystem and config.KeySystem.GuiMode and config.KeySystem.SaveKey then
+  if config.Service and config.DebugMode then
     Configs.Service = config.Service
     Configs.DebugMode = config.DebugMode
-    Configs.KeySystem = config.KeySystem
+    if config.KeySystem then
+      Configs.KeySystem = config.KeySystem
+    end
     if config.DebugMode == true then
       print("[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
     end
@@ -20,7 +22,7 @@ function LucheVitae:Settings(config)
   end
 end
 
-function LucheVitae:Implement()
+function LucheVitae:Implement(tipo)
   pcall(function()
     local ExecutorName = identifyexecutor() or "NO NAME!!!"
     local Gamepado = "false"
@@ -40,6 +42,7 @@ function LucheVitae:Implement()
       Url = "http://localhost:3000/api/integrity",
       Method = "POST",
       Headers = {
+        ["type"] = tostring(tipo),
         ["service"] = tostring(Configs.Service),
         ["executor"] = tostring(ExecutorName),
         ["gamename"] = tostring(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name),
@@ -56,7 +59,7 @@ function LucheVitae:Implement()
       }
     })
   
-    if not response or response.StatusCode == 401 then
+    if not response or ((tipo == "Check Banned" or tipo == "Everything") and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
     end
   end)
