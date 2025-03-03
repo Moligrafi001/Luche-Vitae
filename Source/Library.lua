@@ -13,11 +13,11 @@ local function AdmMsg(type, msg)
     error("[ Luche Vitae ] - " .. tostring(msg))
   elseif type == s then
     if msg == p then
-      print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+      print("print")
     elseif msg == w then
-      warn(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+      warn("warn")
     elseif msg == e then
-      error(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+      error("erro")
     end
   end
 end
