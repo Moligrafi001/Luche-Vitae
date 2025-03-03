@@ -14,10 +14,10 @@ LucheVitae:Settings({ -- Load your settings
 local function ValidateKey(key) -- Your own custom function to check the key
   if LucheVitae:AuthKey(key) == "valid" then -- If key is valid
     print("Key is valid, loading...") -- Valid notification
-  elseif LucheVitae:AuthKey(key) == "invalid" then -- If key is invalid
-    print("Key is invalid!") -- Invalid notification
   elseif LucheVitae:AuthKey(key) == "expired" then -- If key expired
     print("Key expired!") -- Expired notification
+  elseif LucheVitae:AuthKey(key) == "invalid" then -- If key is invalid
+    print("Key is invalid!") -- Invalid notification
   else -- If authentication failed
     print("Failed to check the key.") -- Failed to check key notification
   end -- Add your own actions
