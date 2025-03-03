@@ -11,13 +11,13 @@ local function AdmMsg(type, msg)
     warn("[ Luche Vitae ] - " .. tostring(msg))
   elseif type == e then
     error("[ Luche Vitae ] - " .. tostring(msg))
-  elseif type == s then
+  elseif type == 9 then
     if msg == p then
-      print("print")
+      print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
     elseif msg == w then
-      warn("warn")
+      warn(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
     elseif msg == e then
-      error("erro")
+      error(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
     end
   end
 end
@@ -28,9 +28,9 @@ local function d()
 end
 
 function LucheVitae:PrintService()
-  AdmMsg(s, p)
+  AdmMsg(9, p)
   AdmMsg(p, "YOUR SERVICE IS: " .. Configs.Service)
-  AdmMsg(s, p)
+  AdmMsg(9, p)
 end
 
 function LucheVitae:Settings(config)
@@ -41,15 +41,15 @@ function LucheVitae:Settings(config)
       Configs.KeySystem = config.KeySystem
     end
     if d() then
-      AdmMsg(s, p)
+      AdmMsg(9, p)
       AdmMsg(w, "DEBUG MODE IS ENABLED")
-      AdmMsg(s, p)
+      AdmMsg(9, p)
       AdmMsg(p, "LOADING SYSTEM...")
       AdmMsg(p, "SYSTEM STARTED SUCCESFULLY")
-      AdmMsg(s, p)
+      AdmMsg(9, p)
     end
   else
-    AdmMsg(s, w)
+    AdmMsg(9, w)
     AdmMsg(e, "MISSING PARAMS IN UR SETTINGS")
   end
 end
@@ -121,7 +121,7 @@ function LucheVitae:AuthKey(key)
     Method = "GET"
   })
   if d() then
-    AdmMsg(s, p)
+    AdmMsg(9, p)
     AdmMsg(p, "CHEKING KEY... RESULT:")
   end
   if response.StatusCode == 200 then
