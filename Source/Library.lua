@@ -3,8 +3,18 @@ LucheVitae.__index = LucheVitae
 
 local Configs = {}
 
+local function AdmMsg(type, msg)
+  if type == p then
+    print("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == w then
+    warn("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == e then
+    error("[ Luche Vitae ] - " .. tostring(msg))
+  end
+end
+
 function LucheVitae:PrintService()
-  print(Configs.Service)
+  AdmMsg(p, "YOUR SERVICE IS: " .. Configs.Service)
 end
 
 function LucheVitae:Settings(config)
@@ -15,7 +25,8 @@ function LucheVitae:Settings(config)
       Configs.KeySystem = config.KeySystem
     end
     if config.DebugMode == true then
-      print("[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
+      AdmMsg(w, "[ Luche Vitae ] - DEBUG MODE IS ENABLED")
+      AdmMsg(p, "[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
     end
   else
     error("[ Luche Vitae ] - MISSING PARAMS IN UR SETTINGS")
