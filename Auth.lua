@@ -75,6 +75,10 @@ function LucheVitae:AuthKey(key)
   end
 end
 
+if not Configs.Service then
+  return error("[ Luche Vitae ] - NO SERVICE ADDED")
+end
+
 local mt = {
     __newindex = function(self, key, value)
         print("Nova chave adicionada:", key, "com o valor:", value)
