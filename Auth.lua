@@ -55,7 +55,7 @@ function LucheVitae:Implement()
 end
 
 function LucheVitae:GetKey()
-  setclipboard("http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId())
+  return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
 function LucheVitae:AuthKey(key)
