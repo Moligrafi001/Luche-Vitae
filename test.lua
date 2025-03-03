@@ -29,5 +29,5 @@ end
 -- Implementation Functions
 LucheVitae:Implement("Log Statistic") -- Log this execution statistics
 LucheVitae:Implement("Check Banned") -- Check if the user is banned
-LucheVitae:Implement("Send webhook") -- Send webhook embed
+LucheVitae:Implement("Send Webhook") -- Send webhook embed
 LucheVitae:Implement("Everything") -- Will do the same as the 3 above
