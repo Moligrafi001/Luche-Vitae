@@ -1,26 +1,17 @@
--- Auth.lua
-
 local LucheVitae = {}
 LucheVitae.__index = LucheVitae
 
--- Armazenamento interno para configurações
 local Configs = {}
 
--- Método para configurar o serviço
-function LucheVitae:Settings(config)
-    Configs.Service = config.Service or "DefaultService"
-    Configs.KickBan = config.KickBan or false
-    print("[LucheVitae] Configurado serviço:", Configs.Service)
-    print("[LucheVitae] Configurado Kick:", Configs.KickBan)
+function PrintService()
+  print(Configs.Service)
 end
 
--- Método para imprimir o serviço configurado
-function LucheVitae:PrintService()
-    if Configs.Service then
-        print("[LucheVitae] Serviço atual:", Configs.Service)
-    else
-        print("[LucheVitae] Nenhum serviço configurado.")
-    end
+function LucheVitae:Settings(config)
+  Configs.Service = config.Service or "DefaultService"
+  Configs.KickBan = config.KickBan or false
+  print("[LucheVitae] Configurado serviço:", Configs.Service)
+  print("[LucheVitae] Configurado Kick:", Configs.KickBan)
 end
 
 function LucheVitae:Implement()
@@ -59,13 +50,33 @@ function LucheVitae:Implement()
       }
     })
   
-    if not response or (Configs.KickBan == true and response.StatusCode == 401) then
+    if not response or Configs.KickBan == true and response.StatusCode == 401 then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
     end
   end)
 end
 
--- Metamétodo para adicionar novas chaves
+function LucheVitae:GetKey()
+  setclipboard("http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId())
+end
+
+function LucheVitae:CheckKey(key)
+  local response = request({
+    Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Settings.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
+    Method = "GET"
+  })
+  
+  if response.StatusCode == 200 then
+    return "valid"
+  elseif response.StatusCode == 404 then
+    return "invalid"
+  elseif response.StatusCode == 410 then
+    return "expired"
+  else
+    return false
+  end
+end
+
 local mt = {
     __newindex = function(self, key, value)
         print("Nova chave adicionada:", key, "com o valor:", value)
@@ -74,5 +85,4 @@ local mt = {
     __metatable = false -- Protege a metatable
 }
 
--- Define a metatable para a biblioteca
 return setmetatable(LucheVitae, mt)
