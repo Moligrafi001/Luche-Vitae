@@ -13,6 +13,9 @@ function LucheVitae:Settings(config)
     Configs.DebugMode = config.DebugMode
     Configs.KeySystem.GuiMode = config.KeySystem.GuiMode
     Configs.KeySystem.SaveKey = config.KeySystem.SaveKey
+    if config.DebugMode == true then
+      print("[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
+    end
   else
     error("[ Luche Vitae ] - MISSING PARAMS IN UR SETTINGS")
   end
