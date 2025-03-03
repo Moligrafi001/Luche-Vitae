@@ -104,6 +104,7 @@ function LucheVitae:Implement(tipo)
         AdmMsg(3, "IMPLEMENT TYPE NOT SUPPORTED")
       end
     end
+    return true
   end)
 end
 
