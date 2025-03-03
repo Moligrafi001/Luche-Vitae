@@ -40,7 +40,7 @@ function LucheVitae:Settings(config)
     if config.KeySystem then
       Configs.KeySystem = config.KeySystem
     end
-    if config.DebugMode == true then
+    if d() then
       AdmMsg(s, p)
       AdmMsg(w, "DEBUG MODE IS ENABLED")
       AdmMsg(s, p)
