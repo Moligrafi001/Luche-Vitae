@@ -27,12 +27,7 @@ local function d()
   end
 end
 
-function LucheVitae:PrintService()
-  AdmMsg(9, p)
-  AdmMsg(p, "YOUR SERVICE IS: " .. Configs.Service)
-  AdmMsg(9, p)
-end
-
+-- Extra
 function LucheVitae:Settings(config)
   if config.Service and config.DebugMode then
     Configs.Service = config.Service
@@ -54,6 +49,7 @@ function LucheVitae:Settings(config)
   end
 end
 
+-- Connection
 function LucheVitae:Implement(tipo)
   pcall(function()
     local ExecutorName = identifyexecutor() or "NO NAME!!!"
@@ -111,10 +107,7 @@ function LucheVitae:Implement(tipo)
   end)
 end
 
-function LucheVitae:GetKey()
-  return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
-end
-
+-- Key System
 function LucheVitae:AuthKey(key)
   local response = request({
     Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
@@ -145,6 +138,9 @@ function LucheVitae:AuthKey(key)
     end
     return false
   end
+end
+function LucheVitae:GetKey()
+  return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
 local mt = {
