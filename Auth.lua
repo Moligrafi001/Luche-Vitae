@@ -3,7 +3,7 @@ LucheVitae.__index = LucheVitae
 
 local Configs = {}
 
-function PrintService()
+function LucheVitae:PrintService()
   print(Configs.Service)
 end
 
