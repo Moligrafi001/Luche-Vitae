@@ -25,11 +25,11 @@ function LucheVitae:Settings(config)
       Configs.KeySystem = config.KeySystem
     end
     if config.DebugMode == true then
-      AdmMsg(w, "[ Luche Vitae ] - DEBUG MODE IS ENABLED")
-      AdmMsg(p, "[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
+      AdmMsg(w, "DEBUG MODE IS ENABLED")
+      AdmMsg(p, "SYSTEM STARTED SUCCESFULLY")
     end
   else
-    error("[ Luche Vitae ] - MISSING PARAMS IN UR SETTINGS")
+    AdmMsg(e, "MISSING PARAMS IN UR SETTINGS")
   end
 end
 
@@ -72,9 +72,20 @@ function LucheVitae:Implement(tipo)
   
     if not response or ((tipo == "Check Banned" or tipo == "Everything") and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
+      return
     end
     if Configs.DebugMode == true then
-      print("[ Luche Vitae ] - USER IS NOT BANNED FROM THIS SERVICE")
+      if tipo == "Check Banned" or tipo == "Everything" then
+        AdmMsg(P, "USER IS NOT BANNED FROM THIS SERVICE")
+      elseif tipo == "Log Statistic" or tipo == "Everything" then
+        AdmMsg(p, "STATISTIC LOGGED SUCCESFULLY")
+      elseif tipo == "Log Statistic" or tipo == "Everything" then
+        AdmMsg(p, "WEBHOOK EMBED SENT SUCCESFULLY")
+      elseif tipo == "Log Statistic" or tipo == "Everything" then
+        AdmMsg(p, "WEBHOOK EMBED SENT SUCCESFULLY")
+      else
+        AdmMsg(e, "IMPLEMENT TYPE NOT SUPPORTED")
+      end
     end
   end)
 end
