@@ -30,6 +30,8 @@ LucheVitae:Settings({ -- Load your settings
 
 ## 3. Implementation Functions
 
+These are the codes to implement and connect your functions to your service, you can `Log Statistic`, `Check Banned`, `Send Webhook` and use `Everything` to do the same as the 3 other ones.
+
 ```lua
 -- Implementation Functions
 LucheVitae:Implement("Log Statistic") -- Log this execution statistics
@@ -38,7 +40,11 @@ LucheVitae:Implement("Send Webhook") -- Send webhook embed
 LucheVitae:Implement("Everything") -- Will do the same as the 3 above
 ```
 
+> The implementation has a 30s cooldown to avoid spammers
+
 ## Final Example Code
+
+This is a exemple code, you can customize it the way you want, fell free to add and customize your own functions.
 
 ```lua
 local LucheVitae = loadstring(game:HttpGet("https://raw.githubusercontent.com/Moligrafi001/Luche-Vitae/refs/heads/test/Source/Library.lua"))() -- Load the Library
