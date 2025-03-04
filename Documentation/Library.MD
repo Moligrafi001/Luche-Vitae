@@ -1,4 +1,4 @@
-## Luche Vitae Library
+## Luache Library: `Vitae 0.1`
 
 Welcome! This tutorial explains how to use the **Luche Vitae Library**. This powerful library is designed for authentication and implementing functionalities within your script, adding more server side to your client. Each section below breaks down how to load, configure, and utilize the library's key features.
 
