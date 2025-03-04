@@ -1,5 +1,5 @@
-local LucheVitae = {}
-LucheVitae.__index = LucheVitae
+local Luache = {}
+Luache.__index = Luache
 
 local Configs = {}
 
@@ -28,7 +28,7 @@ local function d()
 end
 
 -- Extra
-function LucheVitae:Settings(config)
+function Luache:Settings(config)
   if config.Service then
     Configs.Service = config.Service
     Configs.DebugMode = config.DebugMode
@@ -50,7 +50,7 @@ function LucheVitae:Settings(config)
 end
 
 -- Connection
-function LucheVitae:Implement(tipo)
+function Luache:Implement(tipo)
   pcall(function()
     local ExecutorName = identifyexecutor() or "NO NAME!!!"
     local Gamepado = "false"
@@ -110,7 +110,7 @@ function LucheVitae:Implement(tipo)
 end
 
 -- Key System
-function LucheVitae:AuthKey(key)
+function Luache:AuthKey(key)
   local response = request({
     Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
@@ -141,7 +141,7 @@ function LucheVitae:AuthKey(key)
     return false
   end
 end
-function LucheVitae:GetKey()
+function Luache:GetKey()
   return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
@@ -153,4 +153,4 @@ local mt = {
     __metatable = false
 }
 
-return setmetatable(LucheVitae, mt)
+return setmetatable(Luache, mt)
