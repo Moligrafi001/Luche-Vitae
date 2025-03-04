@@ -6,11 +6,11 @@ local Configs = {}
 -- Funções Locais
 local function AdmMsg(type, msg)
   if type == 1 then
-    print("[ Luche Vitae ] - " .. tostring(msg))
+    print("[ Luache ] - " .. tostring(msg))
   elseif type == 2 then
-    warn("[ Luche Vitae ] - " .. tostring(msg))
+    warn("[ Luache ] - " .. tostring(msg))
   elseif type == 3 then
-    error("[ Luche Vitae ] - " .. tostring(msg))
+    error("[ Luache ] - " .. tostring(msg))
   elseif type == 9 then
     if msg == 1 then
       print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
