@@ -3,25 +3,53 @@ LucheVitae.__index = LucheVitae
 
 local Configs = {}
 
-function LucheVitae:PrintService()
-  print(Configs.Service)
+-- Funções Locais
+local function AdmMsg(type, msg)
+  if type == 1 then
+    print("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == 2 then
+    warn("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == 3 then
+    error("[ Luche Vitae ] - " .. tostring(msg))
+  elseif type == 9 then
+    if msg == 1 then
+      print(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    elseif msg == 2 then
+      warn(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    elseif msg == 3 then
+      error(".*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.")
+    end
+  end
+end
+local function d()
+  if Configs.DebugMode == true then
+    return true
+  end
 end
 
+-- Extra
 function LucheVitae:Settings(config)
-  if config.Service and config.DebugMode then
+  if config.Service then
     Configs.Service = config.Service
     Configs.DebugMode = config.DebugMode
     if config.KeySystem then
       Configs.KeySystem = config.KeySystem
     end
-    if config.DebugMode == true then
-      print("[ Luche Vitae ] - SERVICE STARTED SUCCESFULLY")
+    if d() then
+      AdmMsg(9, 1)
+      AdmMsg(2, "DEBUG MODE IS ENABLED")
+      AdmMsg(9, 1)
+      AdmMsg(1, "LOADING SYSTEM...")
+      AdmMsg(1, "SYSTEM STARTED SUCCESFULLY")
+      AdmMsg(9, 1)
     end
   else
-    error("[ Luche Vitae ] - MISSING PARAMS IN UR SETTINGS")
+    AdmMsg(9, 2)
+    AdmMsg(3, "MISSING SETTINGS PARAMS")
   end
 end
 
+-- Connection
 function LucheVitae:Implement(tipo)
   pcall(function()
     local ExecutorName = identifyexecutor() or "NO NAME!!!"
@@ -61,29 +89,60 @@ function LucheVitae:Implement(tipo)
   
     if not response or ((tipo == "Check Banned" or tipo == "Everything") and response.StatusCode == 401) then
       game:GetService("Players").LocalPlayer:Kick("\n\nYou are permanently banned from this service, don't try to bypass this\n\nProvided by Luche Vitae ™")
+      AdmMsg(3, "YOU ARE BANNED FROM THIS SERVICE")
+      return false
     end
+    if d() then
+      if tipo == "Check Banned" then
+        AdmMsg(1, "USER IS NOT BANNED FROM THIS SERVICE")
+      elseif tipo == "Log Statistic" then
+        AdmMsg(1, "STATISTIC LOGGED SUCCESFULLY")
+      elseif tipo == "Send Webhook" then
+        AdmMsg(1, "WEBHOOK EMBED SENT SUCCESFULLY")
+      elseif tipo == "Everything" then
+        AdmMsg(1, "EVERYTHING SEEMS FINE")
+      else
+        AdmMsg(3, "IMPLEMENT TYPE NOT SUPPORTED")
+      end
+    end
+    return true
   end)
 end
 
-function LucheVitae:GetKey()
-  return "https://orange-auth.squareweb.app/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
-end
-
+-- Key System
 function LucheVitae:AuthKey(key)
   local response = request({
     Url = "https://orange-auth.squareweb.app/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
   })
-  
+  if d() then
+    AdmMsg(9, 1)
+    AdmMsg(1, "CHEKING KEY... RESULT:")
+  end
   if response.StatusCode == 200 then
+    if d() then
+      AdmMsg(1, "CHECKED KEY IS VALID")
+    end
     return "valid"
   elseif response.StatusCode == 404 then
+    if d() then
+      AdmMsg(2, "CHECKED KEY IS INVALID")
+    end
     return "invalid"
   elseif response.StatusCode == 410 then
+    if d() then
+      AdmMsg(2, "CHECKED KEY EXPIRED")
+    end
     return "expired"
   else
+    if d() then
+      AdmMsg(2, "INTERNAL SERVER ERROR WHILE CHECKING THE KEY")
+    end
     return false
   end
+end
+function LucheVitae:GetKey()
+  return "https://orange-auth.squareweb.app/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
 local mt = {
