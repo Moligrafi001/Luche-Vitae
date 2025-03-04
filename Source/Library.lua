@@ -39,7 +39,7 @@ function LucheVitae:Implement(tipo)
     end
     local httrest = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request)
     local response = httrest({
-      Url = "http://localhost:3000/api/integrity",
+      Url = "https://orange-auth.squareweb.app/api/integrity",
       Method = "POST",
       Headers = {
         ["type"] = tostring(tipo),
@@ -66,12 +66,12 @@ function LucheVitae:Implement(tipo)
 end
 
 function LucheVitae:GetKey()
-  return "http://localhost:3000/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
+  return "https://orange-auth.squareweb.app/getkey/?service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId()
 end
 
 function LucheVitae:AuthKey(key)
   local response = request({
-    Url = "http://localhost:3000/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
+    Url = "https://orange-auth.squareweb.app/api/key?type=check&key=" .. key .. "&service=" .. Configs.Service .. "&id=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
     Method = "GET"
   })
   
